@@ -16,7 +16,7 @@ public class ListaContactos {
 	public void insertarNodoTemporal (PosicionPersona p) {
 		NodoTemporal aux = lista, ant=null;
 		boolean salir=false,  encontrado = false;
-		insertInTempPosition(aux, ant, salir, encontrado, p);
+		encontrado = insertInTempPosition(aux, ant, salir, encontrado, p);
 		/**
 		 * No hemos encontrado ninguna posición temporal, así que
 		 * metemos un nodo nuevo en la lista
@@ -60,7 +60,7 @@ public class ListaContactos {
 	 * Busco la posición adecuada donde meter el nodo de la lista, excepto
 	 * que esté en la lista. Entonces solo añadimos una coordenada.
 	 */
-	public void insertInTempPosition (NodoTemporal aux, NodoTemporal ant, boolean salir, boolean encontrado, PosicionPersona p) {
+	public boolean insertInTempPosition (NodoTemporal aux, NodoTemporal ant, boolean salir, boolean encontrado, PosicionPersona p) {
 		while (aux!=null && !salir) {
 			if (aux.getFecha().compareTo(p.getFechaPosicion()) == 0) {
 				encontrado = true;
@@ -68,6 +68,7 @@ public class ListaContactos {
 				insertInCoordList(aux, ant, salir,p);
 			}
 		}
+		return encontrado:
 	}
 
 	/**
