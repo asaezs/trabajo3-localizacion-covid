@@ -69,23 +69,28 @@ public class ContactosCovid {
 		String datas[] = dividirEntrada(data);
 		for (String linea : datas) {
 			String datos[] = this.dividirLineaData(linea);
-			if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
-				throw new EmsInvalidTypeException();
+			loadDataInList(datos);
+		}
+	}
+
+	public void loadDataInList(String[] datos) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException,
+			EmsDuplicatePersonException, EmsDuplicateLocationException {
+		if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
+			throw new EmsInvalidTypeException();
+		}
+		if (datos[0].equals("PERSONA")) {
+			if (datos.length != Constantes.MAX_DATOS_PERSONA) {
+				throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
 			}
-			if (datos[0].equals("PERSONA")) {
-				if (datos.length != Constantes.MAX_DATOS_PERSONA) {
-					throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
-				}
-				this.poblacion.addPersona(this.crearPersona(datos));
+			this.poblacion.addPersona(this.crearPersona(datos));
+		}
+		if (datos[0].equals("LOCALIZACION")) {
+			if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
+				throw new EmsInvalidNumberOfDataException("El número de datos para LOCALIZACION es menor de 6");
 			}
-			if (datos[0].equals("LOCALIZACION")) {
-				if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
-					throw new EmsInvalidNumberOfDataException("El número de datos para LOCALIZACION es menor de 6");
-				}
-				PosicionPersona pp = this.crearPosicionPersona(datos);
-				this.localizacion.addLocalizacion(pp);
-				this.listaContactos.insertarNodoTemporal(pp);
-			}
+			PosicionPersona pp = this.crearPosicionPersona(datos);
+			this.localizacion.addLocalizacion(pp);
+			this.listaContactos.insertarNodoTemporal(pp);
 		}
 	}
 
@@ -120,24 +125,7 @@ public class ContactosCovid {
 				datas = dividirEntrada(data.trim());
 				for (String linea : datas) {
 					String datos[] = this.dividirLineaData(linea);
-					if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
-						throw new EmsInvalidTypeException();
-					}
-					if (datos[0].equals("PERSONA")) {
-						if (datos.length != Constantes.MAX_DATOS_PERSONA) {
-							throw new EmsInvalidNumberOfDataException("El número de datos para PERSONA es menor de 8");
-						}
-						this.poblacion.addPersona(this.crearPersona(datos));
-					}
-					if (datos[0].equals("LOCALIZACION")) {
-						if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
-							throw new EmsInvalidNumberOfDataException(
-									"El número de datos para LOCALIZACION es menor de 6" );
-						}
-						PosicionPersona pp = this.crearPosicionPersona(datos);
-						this.localizacion.addLocalizacion(pp);
-						this.listaContactos.insertarNodoTemporal(pp);
-					}
+					loadDataInList(datos);
 				}
 
 			}
