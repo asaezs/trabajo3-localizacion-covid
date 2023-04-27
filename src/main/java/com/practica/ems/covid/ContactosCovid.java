@@ -212,32 +212,15 @@ public class ContactosCovid {
 
 	private Persona crearPersona(String[] data) {
 		Persona persona = new Persona();
-		for (int i = 1; i < Constantes.MAX_DATOS_PERSONA; i++) {
-			String s = data[i];
-			switch (i) {
-			case 1:
-				persona.setDocumento(s);
-				break;
-			case 2:
-				persona.setNombre(s);
-				break;
-			case 3:
-				persona.setApellidos(s);
-				break;
-			case 4:
-				persona.setEmail(s);
-				break;
-			case 5:
-				persona.setDireccion(s);
-				break;
-			case 6:
-				persona.setCp(s);
-				break;
-			case 7:
-				persona.setFechaNacimiento(parsearFecha(s));
-				break;
-			}
-		}
+
+		persona.setDocumento(data[0]);
+		persona.setNombre(data[1]);
+		persona.setApellidos(data[2]);
+		persona.setEmail(data[3]);
+		persona.setDireccion(data[4]);
+		persona.setCp(data[5]);
+		persona.setFechaNacimiento(parsearFecha(data[6]));
+
 		return persona;
 	}
 
@@ -245,28 +228,17 @@ public class ContactosCovid {
 		PosicionPersona posicionPersona = new PosicionPersona();
 		String fecha = null, hora;
 		float latitud = 0, longitud;
-		for (int i = 1; i < Constantes.MAX_DATOS_LOCALIZACION; i++) {
-			String s = data[i];
-			switch (i) {
-			case 1:
-				posicionPersona.setDocumento(s);
-				break;
-			case 2:
-				fecha = data[i];
-				break;
-			case 3:
-				hora = data[i];
-				posicionPersona.setFechaPosicion(parsearFecha(fecha, hora));
-				break;
-			case 4:
-				latitud = Float.parseFloat(s);
-				break;
-			case 5:
-				longitud = Float.parseFloat(s);
-				posicionPersona.setCoordenada(new Coordenada(latitud, longitud));
-				break;
-			}
-		}
+
+		posicionPersona.setDocumento(data[0]);
+
+		fecha = data[1];
+		hora = data[2];
+		posicionPersona.setFechaPosicion(parsearFecha(fecha, hora));
+
+		latitud = Float.parseFloat(data[3]);
+		longitud = Float.parseFloat(data[4]);
+		posicionPersona.setCoordenada(new Coordenada(latitud, longitud));
+
 		return posicionPersona;
 	}
 	
