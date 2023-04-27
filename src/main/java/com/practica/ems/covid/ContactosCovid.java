@@ -213,13 +213,13 @@ public class ContactosCovid {
 	private Persona crearPersona(String[] data) {
 		Persona persona = new Persona();
 
-		persona.setDocumento(data[0]);
-		persona.setNombre(data[1]);
-		persona.setApellidos(data[2]);
-		persona.setEmail(data[3]);
-		persona.setDireccion(data[4]);
-		persona.setCp(data[5]);
-		persona.setFechaNacimiento(parsearFecha(data[6]));
+		persona.setDocumento(data[1]);
+		persona.setNombre(data[2]);
+		persona.setApellidos(data[3]);
+		persona.setEmail(data[4]);
+		persona.setDireccion(data[5]);
+		persona.setCp(data[6]);
+		persona.setFechaNacimiento(parsearFecha(data[7]));
 
 		return persona;
 	}
@@ -229,14 +229,14 @@ public class ContactosCovid {
 		String fecha = null, hora;
 		float latitud = 0, longitud;
 
-		posicionPersona.setDocumento(data[0]);
+		posicionPersona.setDocumento(data[1]);
 
-		fecha = data[1];
-		hora = data[2];
+		fecha = data[2];
+		hora = data[3];
 		posicionPersona.setFechaPosicion(parsearFecha(fecha, hora));
 
-		latitud = Float.parseFloat(data[3]);
-		longitud = Float.parseFloat(data[4]);
+		latitud = Float.parseFloat(data[4]);
+		longitud = Float.parseFloat(data[5]);
 		posicionPersona.setCoordenada(new Coordenada(latitud, longitud));
 
 		return posicionPersona;
