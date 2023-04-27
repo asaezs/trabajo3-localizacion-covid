@@ -1,6 +1,5 @@
 package com.practica.lista;
 
-import com.practica.genericas.Coordenada;
 import com.practica.genericas.FechaHora;
 import com.practica.genericas.PosicionPersona;
 
@@ -49,12 +48,12 @@ public class 	ListaContactos {
 		 */
 
 		if(!encontrado) {
-			InsertarNuevoNodo(p, ant, aux);
+			insertarNuevoNodo(p, ant, aux);
 
 		}
 	}
 
-	void InsertarNuevoNodo(PosicionPersona p, NodoTemporal ant, NodoTemporal aux){
+	void insertarNuevoNodo(PosicionPersona p, NodoTemporal ant, NodoTemporal aux){
 		NodoTemporal nuevo = new NodoTemporal();
 		nuevo.setFecha(p.getFechaPosicion());
 

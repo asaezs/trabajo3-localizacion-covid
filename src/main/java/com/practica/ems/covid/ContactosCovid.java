@@ -4,7 +4,6 @@ package com.practica.ems.covid;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -96,9 +95,7 @@ public class ContactosCovid {
 	}
 
 	public void loadDataFile(String fichero, boolean reset) {
-		File archivo = null;
 		FileReader fr = null;
-		BufferedReader br = null;
 		String datas[] = null, data = null;
 		loadDataFile(fichero, reset, fr, datas, data);
 		
