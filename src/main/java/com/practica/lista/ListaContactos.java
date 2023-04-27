@@ -66,7 +66,7 @@ public class ListaContactos {
 			if (aux.getFecha().compareTo(p.getFechaPosicion()) == 0) {
 				encontrado = true;
 				salir = true;
-				insertInCoordList(aux, ant, salir,p);
+				salir = insertInCoordList(aux, ant,p);
 			}
 		}
 		return encontrado;
@@ -75,10 +75,11 @@ public class ListaContactos {
 	/**
 	 * Insertamos en la lista de coordenadas
 	 */
-	public void insertInCoordList(NodoTemporal aux, NodoTemporal ant, boolean salir, PosicionPersona p) {
+	public boolean insertInCoordList(NodoTemporal aux, NodoTemporal ant, PosicionPersona p) {
 		NodoPosicion npActual = aux.getListaCoordenadas();
 		NodoPosicion npAnt=null;
 		boolean npEncontrado = false;
+		boolean salir = false;
 		while (npActual!=null && !npEncontrado) {
 			if(npActual.getCoordenada().equals(p.getCoordenada())) {
 				npEncontrado=true;
@@ -100,6 +101,7 @@ public class ListaContactos {
 		}else if(aux.getFecha().compareTo(p.getFechaPosicion())>0) {
 			salir = true;
 		}
+		return salir;
 	}
 
 	private boolean buscarPersona (String documento, NodoPersonas nodo) {
