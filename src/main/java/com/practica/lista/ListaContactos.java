@@ -32,7 +32,7 @@ public class 	ListaContactos {
 				 */
 
 				NodoPosicion npAnt = null;
-
+				insertarEnListaCoordenadas(aux, p, npAnt);
 
 			}else
 			if(aux.getFecha().compareTo(p.getFechaPosicion())<0) {
