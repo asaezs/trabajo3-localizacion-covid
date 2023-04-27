@@ -31,17 +31,9 @@ public class 	ListaContactos {
 				 * Insertamos en la lista de coordenadas
 				 */
 
-				NodoPosicion npAnt= new NodoPosicion();
-				boolean npEncontrado = insertarEnListaCoordenadas(aux, p, npAnt);
+				NodoPosicion npAnt = null;
 
-				if(!npEncontrado) {
-					NodoPosicion npNuevo = new NodoPosicion(p.getCoordenada(),1, null);
 
-					if(aux.getListaCoordenadas()==null)
-						aux.setListaCoordenadas(npNuevo);
-					else
-						npAnt.setSiguiente(npNuevo);
-				}
 			}else
 			if(aux.getFecha().compareTo(p.getFechaPosicion())<0) {
 				ant = aux;
@@ -98,7 +90,7 @@ public class 	ListaContactos {
 		}
 	}
 
-	boolean insertarEnListaCoordenadas(NodoTemporal aux, PosicionPersona p, NodoPosicion npAnt){
+	void insertarEnListaCoordenadas(NodoTemporal aux, PosicionPersona p, NodoPosicion npAnt){
 		NodoPosicion npActual = aux.getListaCoordenadas();
 		boolean npEncontrado = false;
 
@@ -114,7 +106,15 @@ public class 	ListaContactos {
 			}
 		}
 
-		return npEncontrado;
+		if(!npEncontrado) {
+			NodoPosicion npNuevo = new NodoPosicion(p.getCoordenada(),1, null);
+
+			if(aux.getListaCoordenadas()==null)
+				aux.setListaCoordenadas(npNuevo);
+			else
+				npAnt.setSiguiente(npNuevo);
+		}
+
 	}
 
 	private boolean buscarPersona (String documento, NodoPersonas nodo) {
