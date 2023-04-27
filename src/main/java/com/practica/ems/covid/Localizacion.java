@@ -40,7 +40,7 @@ public class Localizacion {
 	    while(it.hasNext()) {
 	    	cont++;
 	    	PosicionPersona pp = it.next();
-	    	FechaHora fechaHora = this.parsearFecha(fecha, hora);
+	    	FechaHora fechaHora = FechaHora.parsearFecha(fecha, hora);
 	    	if(pp.getDocumento().equals(documento) && 
 	    	   pp.getFechaPosicion().equals(fechaHora)) {
 	    		return cont;
@@ -80,46 +80,21 @@ public class Localizacion {
 	@Override
 	public String toString() {
 		String cadena = "";
-		for(int i = 0; i < this.lista.size(); i++) {
+		for (int i = 0; i < this.lista.size(); i++) {
 			PosicionPersona pp = lista.get(i);
-	        cadena += String.format("%s;", pp.getDocumento());
-	        FechaHora fecha = pp.getFechaPosicion();        
-	        cadena+=String.format("%02d/%02d/%04d;%02d:%02d;", 
-	        		fecha.getFecha().getDia(), 
-	        		fecha.getFecha().getMes(), 
-	        		fecha.getFecha().getAnio(),
-	        		fecha.getHora().getHora(),
-	        		fecha.getHora().getMinuto());
-	        cadena+=String.format("%.4f;%.4f\n", pp.getCoordenada().getLatitud(), 
-	        		pp.getCoordenada().getLongitud());
-	    }
-		
-		return cadena;		
-	}
-	
-	@SuppressWarnings("unused")
-	private FechaHora parsearFecha (String fecha) {
-		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
-		dia = Integer.parseInt(valores[0]);
-		mes = Integer.parseInt(valores[1]);
-		anio = Integer.parseInt(valores[2]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, 0, 0);
-		return fechaHora;
-	}
-	
-	private  FechaHora parsearFecha (String fecha, String hora) {
-		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
-		dia = Integer.parseInt(valores[0]);
-		mes = Integer.parseInt(valores[1]);
-		anio = Integer.parseInt(valores[2]);
-		int minuto, segundo;
-		valores = hora.split("\\:");
-		minuto = Integer.parseInt(valores[0]);
-		segundo = Integer.parseInt(valores[1]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, minuto, segundo);
-		return fechaHora;
+			cadena += String.format("%s;", pp.getDocumento());
+			FechaHora fecha = pp.getFechaPosicion();
+			cadena += String.format("%02d/%02d/%04d;%02d:%02d;",
+					fecha.getFecha().getDia(),
+					fecha.getFecha().getMes(),
+					fecha.getFecha().getAnio(),
+					fecha.getHora().getHora(),
+					fecha.getHora().getMinuto());
+			cadena += String.format("%.4f;%.4f\n", pp.getCoordenada().getLatitud(),
+					pp.getCoordenada().getLongitud());
+		}
+
+		return cadena;
 	}
 	
 }
